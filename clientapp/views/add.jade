@@ -1,0 +1,19 @@
+extends layout
+
+block content
+    h1= title
+    form(method='POST' action='')
+        div.form-group
+        label(for='acctID_inpt') Account ID:
+        input#name.form-control(type='text', name='acctId_inpt' value=(undefined===data.accountID ? '' : data.accountID))
+        br
+        label(for='ntwrk_sel') Select Network:
+        select#name.form-control(name='ntwrk_sel', value=(undefined===data.selectedNetwork ? '' : data.selectedNetwork))
+            each val,index in data.networkOptions
+                option #{data.networkOptions[index]}
+        br
+        label(for='privKey_inpt') Private Key:
+        input#name.form-control(type='text', name='privKey_inpt' value=(undefined===data.accountID ? '' : data.accountID))
+        br
+        button.btn.btn-primary(type='submit') Submit
+        h3= errors

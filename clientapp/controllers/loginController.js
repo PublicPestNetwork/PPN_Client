@@ -85,7 +85,7 @@ exports.login_form_post =  function(req, res, next) {
             console.log("Importing wallet info....")
             if(await initAccount(res, errors, loginData)){
                 console.log("Wallet info set successfully!")
-                res.render('index', { title: 'Express' });
+                res.redirect('/user');
                 /// Get Topic Info ///
                 var data = new Object();
                 data.topicId = "0.0.46939";
