@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<div id="myDIV" class="header">
+  <h2>My Bugs</h2>
+  <input type="text" id="myInput" placeholder="Title...">
+  <span onclick="newElement()" class="addBtn">Add</span>
+</div>
+<h2>My Heroes</h2>
+<ul>
+  <li *ngFor="let bug of bugs"
+    [class.selected]="bug === selectedBug"
+    (click)="onSelect(bug)">
+    <span>{{bug.id}}</span> {{bug.name}}
+  </li>
+</ul>
+
+<div *ngIf="selectedBug">
+
+  <h2>{{selectedBug.name | uppercase}} Details</h2>
+  <div><span>id: </span>{{selectedBug.id}}</div>
+  <div>
+    <label>name:
+      <input [(ngModel)]="selectedBug.name" placeholder="name"/>
+    </label>
+  </div>
+
+</div>
+</body>
+</html>
