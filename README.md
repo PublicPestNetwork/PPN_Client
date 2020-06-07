@@ -1,7 +1,3 @@
 # PPN_Client
 
-
-### RUN ###
-```
-DEBUG=clientapp:* npm run devstart
-```
+This branch is exclusively for pushing to our aws elastic beanstalk environment
