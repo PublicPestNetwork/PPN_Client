@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    h1= title
+    form(method='POST' action='')
+        div.form-group
+        label(for='zip_sel') Select Zip:
+        select#name.form-control(name='zip_sel', value=(undefined===data.zip ? '' : data.zip))
+            each val,index in data.zip
+                option #{data.zip[index]}
+        
