@@ -5,7 +5,14 @@ block content
     form(method='POST' action='')
         div.form-group
         label(for='zip_sel') Select Zip:
-        select#name.form-control(name='zip_sel', value=(undefined===data.zip ? '' : data.zip))
+        select#name.form-control(name='zip_sel', value='')
             each val,index in data.zip
-                option #{data.zip[index]}
-        
+                option(value=val selected=(val === data.selectedZip)) #{data.zip[index]}
+        div.form-group
+        if data.bugs
+            each val,index in data.bugs
+                label(for=(val+"_inpt")) #{val}: 
+                input#name.form-control(type='text', name=(val+"_inpt") value=0)
+                br
+        br    
+        button.btn.btn-primary(type='submit') Submit

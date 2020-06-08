@@ -13,11 +13,8 @@ router.get('/', function(req, res, next) {
 
 /// ADD ROUTES ///
 router.get('/add', add_controller.add_form_get);
-//router.post('/add', add_controller.add_form_post);
+router.post('/add', add_controller.add_form_post);
 
-router.post('/', function (req, res) {
-  login_controller.login_form_post(req, res)
-})
 
 /*
 /// BOOK ROUTES ///
