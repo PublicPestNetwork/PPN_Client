@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var hash = require('hash-sdk');
 var Login = require('../models/login');
+var HashNet = require('../models/hashnet.js');
 
 /// User Input validation & sanitization ///
 const validator = require('express-validator');
@@ -20,30 +20,6 @@ loginData = {
     'privateKey': privateKey,
     'selectedNetwork': networkOptions[0]
 }
-
-const initAccount = async (res, errors, account) => {
-    try {
-        errors = errors.array();
-        // Setting it default to 'software' it talks to sdk directly
-        // you can use other settings IF you're on the browser. 
-        // Like prompt user to enter private key or mnemonic via a UI
-        // As well as directly connect to Composer chrome extension
-        await hash.setProvider('software');
-        const accountData = {
-            accountId: account.accountID,
-            network: account.selectedNetwork,
-            keys: {
-                privateKey: account.privateKey
-            }
-        }
-        await hash.setAccount(accountData);
-        return true;
-    } catch (e) {
-        console.log('Error in intializing account:::', e);
-        res.render('login', { title: 'Login', data: loginData, errors: e.errorString});
-        return false;
-    }
-  }
 
 exports.init = function(req, res){
     res.render('login', { title: 'LOGIN'});
@@ -79,54 +55,17 @@ exports.login_form_post =  function(req, res, next) {
       }
       else {
         console.log(loginData);
-
+        
         (async () => {
-            /// Import Wallet Info ///
-            console.log("Importing wallet info....")
-            if(await initAccount(res, errors, loginData)){
-                console.log("Wallet info set successfully!")
+            if(await HashNet.initAccount(res, errors, loginData)){
                 res.redirect('/user');
-                /// Get Topic Info ///
-                var data = new Object();
-                data.topicId = "0.0.46939";
-                console.log("Getting topic info " + data.topicId);  
-                hash.triggerTopicInfo(data, (err,res)=>{
-                if(err){
-                    //error case
-                    console.log('Error:::',err);
-                }else{
-                    //success case
-                    console.log('Success:::',res);
-                }
-                });
+                /// Get Topic Info ///  
+                HashNet.getTopicInfo(); 
             }else{
                 console.log("FAIL")
             }
-          })()
-        //res.render('login', { title: 'Login', data: loginData });
-        // Data from form is valid.
-        /*
-        // Check if Genre with same name already exists.
-        Genre.findOne({ 'name': req.body.name })
-          .exec( function(err, found_genre) {
-             if (err) { return next(err); }
-  
-             if (found_genre) {
-               // Genre exists, redirect to its detail page.
-               res.redirect(found_genre.url);
-             }
-             else {
-  
-               genre.save(function (err) {
-                 if (err) { return next(err); }
-                 // Genre saved. Redirect to genre detail page.
-                 res.redirect(genre.url);
-               });
-  
-             }
-  
-           });
-        */
+        })()
+        
       }
         
     }

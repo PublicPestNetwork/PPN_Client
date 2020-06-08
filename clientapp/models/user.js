@@ -4,22 +4,23 @@ var temp = "Hello World";
 var userDB = {
     "users":{
         "bryan": {
-            "buglist": [
-                "whitefly",
-                "gnat",
-                "treeko",
-                "ant"
-            ]
-        }
-    },
+            "locations":{
+                "4510":['gnat', 'thrip', 'wasp'],
+                "4050":['whitefly', 'gnat', 'ant']
+            }
+        },
         "0.0.46775":{
-            "buglist": [
-                "whitefly",
-                "gnat",
-                "magikarp",
-                "antlion"
-            ]
+            "locations":{
+                "4510":['gnat', 'thrip', 'wasp'],
+                "4050":['whitefly', 'gnat', 'ant']
+            }
         }
+    }
+}
+
+var bugDB = {
+    "4510":['whitefly', 'gnat', 'firefly'],
+    "4050":['dragonfly', 'ant', 'flea']
 }
 console.log(userDB);
 
