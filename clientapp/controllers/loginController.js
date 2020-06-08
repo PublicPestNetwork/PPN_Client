@@ -6,10 +6,6 @@ var HashNet = require('../models/hashnet.js');
 /// User Input validation & sanitization ///
 const validator = require('express-validator');
 
-console.log("=============")
-console.log(Login)
-console.log("=============")
-
 const networkOptions = ["testnet", "mainnet"]
 accountID = ""
 privateKey = ""
@@ -54,8 +50,6 @@ exports.login_form_post =  function(req, res, next) {
         return;
       }
       else {
-        console.log(loginData);
-        
         (async () => {
             if(await HashNet.initAccount(res, errors, loginData)){
                 res.redirect('/user');

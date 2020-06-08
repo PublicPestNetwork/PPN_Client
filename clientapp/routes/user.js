@@ -15,6 +15,9 @@ router.get('/', function(req, res, next) {
 router.get('/add', add_controller.add_form_get);
 router.post('/add', add_controller.add_form_post);
 
+/// EDIT ROUTES ///
+router.get('/edit', edit_controller.edit_form_get);
+router.post('/edit', edit_controller.edit_form_post);
 
 /*
 /// BOOK ROUTES ///

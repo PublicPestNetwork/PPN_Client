@@ -10,6 +10,9 @@ block content
                 option(value=val selected=(val === data.selectedZip)) #{data.zip[index]}
         div.form-group
         if data.buglist
+            label(for=("uid_inpt")) Previous UID:  
+            input#name.form-control(type='text', name=('uid_inpt') value='')
+            br
             each val,index in data.buglist
                 label(for=(val+"_inpt")) #{val}: 
                 input#name.form-control(type='text', name=(val+"_inpt") value='')

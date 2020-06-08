@@ -10,51 +10,39 @@ const validator = require('express-validator');
 formData = {
     'zip': [],
     'selectedZip': '',
-    'bugs': [],
-    'bugCount': [],
+    'buglist': [],
+    'bugCount': {},
     'readySubmit': false
 }
 
 function initUserData() {
     tmp_zips = []
-    // Load in zip codes //
+    // Load zip codes //
     for (const item in add_model.getUserData('bryan')['locations']){
-        console.log(item);
         tmp_zips.push(item)
     }
     formData.zip = tmp_zips
     // Init selectedZip //
     formData.selectedZip = formData.zip[0]
-    console.log(formData);
 }
 
 function appendToLedger(formData){
     console.log("APPENDING FORM DATA TO LEDGER"); 
-    message = formData.selectedZip.toString() + formData.bugs.toString() + formData.bugCount.toString();
-    HashNet.submitMessage(message);
-    /*
-    hash.triggerMessageSubmit(data, (err,res)=>{
-        if(err){
-            //error case
-            console.log('Error:::',err);
-        }else{
-            //success case
-            console.log('Success:::',res);
-        }
-        console.log(err);
-        console.log(res);
-      });
-    */
+    // Format obj for HashNet Model //
+    msgData = {
+        'zip':formData.selectedZip,
+        'bugCount': formData.bugCount
+    }
+    HashNet.submitMessage(msgData);
 }
 
 function updateUserData(selectedZip, uploadData){
     formData.selectedZip = selectedZip
-    formData.bugs = add_model.getUserData('bryan')['locations'][selectedZip];
+    formData.buglist = add_model.getUserData('bryan')['locations'][selectedZip];
 
     if (uploadData){
         appendToLedger(formData)
     }
-    console.log(formData)
 }
 
 
@@ -66,13 +54,43 @@ exports.add_form_get = function(req, res, next) {
     res.render('add', { title: 'Add', data: formData });
     
 }
+
 exports.add_form_post = function(req, res, next) {     
     
-    //res.send(Add.getUserData('bryan'));
-    formZip = req.body.zip_sel;
-    if (formData.bugs.length > 0){
+    var data = req.body;
+    for (var key in req.body) {
+        let value = req.body[key];
+        if(key == "zip_sel"){
+            formZip = value;
+        } else {
+            if (value != ''){
+                formData.bugCount[key.replace("_inpt", '')] = value
+            }
+        }
+    }
+    if (formData.buglist.length > 0){
         formData.readySubmit = true
+    }   
+    console.log(formData);
+    updateUserData(formZip, formData.readySubmit);
+    /*
+    data.forEach(function (item) {
+        console.log(item.id);
+        console.log(item.Name);
+    });
+    */
+    //res.send(Add.getUserData('bryan'));
+    /*
+    var formZip = req.body.zip_sel;
+    var formContent = req.body;
+    if (formData.buglist.length > 0){
+        //formData.readySubmit = true
+        formContent.forEach(function (item) {
+            console.log(item.id);
+            console.log(item.Name);
+        });
     }
     updateUserData(formZip, formData.readySubmit);
+    */
     res.render('add', { title: 'Add', data: formData });
 }
