@@ -2,6 +2,25 @@ var hash = require('hash-sdk');
 
 const TOPICID = "0.0.46939";
 
+// Simple hash from string (based on Java hashCode) //
+function _hashCode(str) {
+    return str.split('').reduce((prevHash, currVal) =>
+      (((prevHash << 5) - prevHash) + currVal.charCodeAt(0))|0, 0);
+}
+  
+
+function _convertToHMess(rawData){
+    formStr = `|${rawData.zip}|`  
+    for (var key in rawData.bugCount) {
+        let value = rawData.bugCount[key];
+        formStr = formStr + `${key}:${value};` 
+    }
+    formStr = formStr.replace(/.$/,"|"); // Replace last char w/ "|"
+    hashReadyStr = Date.now().toString() + formStr ;
+    //console.log(_hashCode(hashReadyStr));
+    return([_hashCode(hashReadyStr), formStr]);
+}
+
 exports.initAccount = async (res, errors, account) => {
     try {
         errors = errors.array();
@@ -50,18 +69,45 @@ exports.getTopicInfo = async () => {
 
 exports.submitMessage = async (messContent) => {
     var data = new Object();
-    // TODO: Replace memo w/ hashable key? To make sure it comes from client?
-    data.memo = "Official PPN Submission"
-    data.topicId = TOPICID;
-    data.message = messContent;
-    // TODO: add a message chain system for messages longer than 4kb (1024 chars) (or maybe serialize data? ask Hteam) //
-    hash.triggerMessageSubmit(data, (err,res)=>{
-        if(err){
-            //error case
-            console.log('Error:::',err);
-        }else{
-            //success case
-            console.log('Success:::',res);
-        }
-    });
+    data.topicId = TOPICID;   
+    [data.memo, data.message] = _convertToHMess(messContent);
+    if (data.message != ''){
+        console.log(`Submitting Message: ${data.memo} ${data.message}`);
+        data.message = `|${data.memo}${data.message}`;
+        hash.triggerMessageSubmit(data, (err,res)=>{
+            if(err){
+                //error case
+                console.log('Error:::',err);
+            }else{
+                //success case
+                console.log('Success:::',res);
+            }
+        });
+    } else {
+        console.log("empty message");
+    }
+}
+
+exports.submitEditMessage = async (prevUID, messContent) => {
+    var data = new Object();
+    data.topicId = TOPICID;    
+    [data.memo, data.message] = _convertToHMess(messContent);
+    if (data.message != ''){
+        data.memo = prevUID
+        console.log(`Submitting Message: ${data.memo} ${data.message}`);
+        data.message = `|${data.memo}${data.message}`;       
+            
+        hash.triggerMessageSubmit(data, (err,res)=>{
+            if(err){
+                //error case
+                console.log('Error:::',err);
+            }else{
+                //success case
+                console.log('Success:::',res);
+            }
+        });
+            
+    } else {
+        console.log("empty message");
+    }
 }

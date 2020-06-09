@@ -10,69 +10,108 @@ const validator = require('express-validator');
 formData = {
     'zip': [],
     'selectedZip': '',
-    'bugs': [],
-    'bugCount': [],
+    'buglist': [],
+    'bugCount': {},
     'readySubmit': false
 }
 
 function initUserData() {
     tmp_zips = []
-    // Load in zip codes //
+    // Load zip codes //
     for (const item in add_model.getUserData('bryan')['locations']){
-        console.log(item);
         tmp_zips.push(item)
     }
     formData.zip = tmp_zips
     // Init selectedZip //
     formData.selectedZip = formData.zip[0]
-    console.log(formData);
 }
 
 function appendToLedger(formData){
     console.log("APPENDING FORM DATA TO LEDGER"); 
-    message = formData.selectedZip.toString() + formData.bugs.toString() + formData.bugCount.toString();
-    HashNet.submitMessage(message);
-    /*
-    hash.triggerMessageSubmit(data, (err,res)=>{
-        if(err){
-            //error case
-            console.log('Error:::',err);
-        }else{
-            //success case
-            console.log('Success:::',res);
-        }
-        console.log(err);
-        console.log(res);
-      });
-    */
+    // Format obj for HashNet Model //
+    msgData = {
+        'zip':formData.selectedZip,
+        'bugCount': formData.bugCount
+    }
+    HashNet.submitMessage(msgData);
 }
 
 function updateUserData(selectedZip, uploadData){
     formData.selectedZip = selectedZip
-    formData.bugs = add_model.getUserData('bryan')['locations'][selectedZip];
+    formData.buglist = add_model.getUserData('bryan')['locations'][selectedZip];
 
     if (uploadData){
         appendToLedger(formData)
+        return true;
     }
-    console.log(formData)
+    return false;
 }
 
-
+function updateFormData(){
+    currUser = add_model.getCurrentUser();
+    //currUser = "0.0.46775"; // DEBUG
+    updatedFormData = add_model.getUserData(currUser);
+    console.log("=====Updated Form Data=====");
+    console.log(updatedFormData);
+    console.log("===========================");
+    formData.zip = Object.keys(updatedFormData.locations)
+    console.log(Object.keys(updatedFormData.locations));
+    console.log("buglist");
+    console.log(updatedFormData.locations[formData.selectedZip])
+    formData.buglist = updatedFormData.locations[formData.selectedZip];
+    console.log("formdata buglist");
+    console.log(formData.buglist);
+    console.log(updatedFormData.locations);
+    console.log(formData.selectedZip);
+    console.log(updatedFormData.locations[formData.selectedZip]);
+    console.log("===========================");
+}
 
 exports.add_form_get = function(req, res, next) {     
-    
     //res.send(Add.getUserData('bryan'));
     initUserData();
-    res.render('add', { title: 'Add', data: formData });
+    updateFormData();
+    firstrun = true
+    res.render('add', { title: 'Add', data: formData, firstrun });
+    updateFormData();
     
 }
+
 exports.add_form_post = function(req, res, next) {     
-    
-    //res.send(Add.getUserData('bryan'));
-    formZip = req.body.zip_sel;
-    if (formData.bugs.length > 0){
+    updateFormData();
+    var data = req.body;
+    for (var key in req.body) {
+        let value = req.body[key];
+        if(key == "zip_sel"){
+            formData.selectedZip = value;
+        } else {
+            if (value != ''){
+                formData.bugCount[key.replace("_inpt", '')] = value
+            }
+        }
+    }
+    if (Object.keys(formData.bugCount).length > 0){
         formData.readySubmit = true
     }
-    updateUserData(formZip, formData.readySubmit);
-    res.render('add', { title: 'Add', data: formData });
+    console.log("Before update");
+    console.log(formData);
+    updateFormData()
+    console.log("After update");
+    if (updateUserData(formData.selectedZip, formData.readySubmit)){
+        formData = {
+            'zip': [],
+            'selectedZip': '',
+            'buglist': [],
+            'bugCount': {},
+            'readySubmit': false
+        }
+        return res.redirect('/user');
+    }else{
+        updateFormData()
+        console.log("formdata before render");
+        console.log(formData);
+        firstrun = false
+        res.render('add', { title: 'Add', data: formData, firstrun });
+    }
+    
 }
