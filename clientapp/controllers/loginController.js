@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Login = require('../models/login');
 var HashNet = require('../models/hashnet.js');
+var user_model = require('../models/user');
 
 /// User Input validation & sanitization ///
 const validator = require('express-validator');
@@ -52,6 +53,7 @@ exports.login_form_post =  function(req, res, next) {
       else {
         (async () => {
             if(await HashNet.initAccount(res, errors, loginData)){
+                user_model.setCurrentUser(loginData.accountID);
                 res.redirect('/user');
                 /// Get Topic Info ///  
                 HashNet.getTopicInfo(); 
