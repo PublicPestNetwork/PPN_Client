@@ -1,18 +1,21 @@
 extends layout
 
 block content
-    h1= title
+    div(class="image")
+        img(src="/images/PPNLogo.png" alt="Image Title" height="75" width="100")
+    h1(class="sans-serif") Input Your Data
     form(method='POST' action='')
         div.form-group
-        label(for='zip_sel') Select Zip:
+        label(for='zip_sel')(class="sans-serif") Select Zip:   
         select#name.form-control(name='zip_sel', value='')
             each val,index in data.zip
                 option(value=val selected=(val === data.selectedZip)) #{data.zip[index]}
+        br
         div.form-group
         if firstrun != true
             each val,index in data.buglist
-                label(for=(val+"_inpt")) #{val}: 
+                label(for=(val+"_inpt"))(class="sans-serif") #{val}: 
                 input#name.form-control(type='text', name=(val+"_inpt") value='')
                 br
         br    
-        button.btn.btn-primary(type='submit') Submit
+        button.btn.btn-primary(type='submit')(class="inputBtn") Submit
