@@ -1,13 +1,16 @@
 extends layout
 
 block content
+    div(class="image")
+        img(src="/images/PPNLogo.png" alt="Image Title" height="75" width="100")
     h1= title
     form(method='POST' action='')
         div.form-group
-        label(for='zip_sel') Select Zip:
+        label(for='zip_sel') Select Zip:  
         select#name.form-control(name='zip_sel', value='')
             each val,index in data.zip
                 option(value=val selected=(val === data.selectedZip)) #{data.zip[index]}
+        br
         div.form-group
         if firstrun != true
             label(for=("uid_inpt")) Previous UID:  

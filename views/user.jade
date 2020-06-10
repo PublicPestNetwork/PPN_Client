@@ -1,8 +1,13 @@
 extends layout
 
 block content
-   a(href='/user/add') Add new data to the Public Ledger
-   br
-   a(href='/user/edit') Edit data on the Public Ledger
-   br
-   a(href='/user/settings') Edit user profile settings
+   div(class="image")
+    img(src="images/PPNLogo.png" alt="Image Title" height="75" width="100")
+   h3(class="sans-serif") What would you like to do?
+      br
+      a(href='/user/add') Add new data to the Public Ledger
+      br
+      a(href='/user/edit') Edit data on the Public Ledger
+      br
+      a(href='/') Edit user profile settings
+      
