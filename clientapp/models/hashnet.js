@@ -71,34 +71,43 @@ exports.submitMessage = async (messContent) => {
     var data = new Object();
     data.topicId = TOPICID;   
     [data.memo, data.message] = _convertToHMess(messContent);
-    console.log(`Submitting Message: ${data.memo} ${data.message}`);
-    data.message = `|${data.memo}${data.message}`;
-    hash.triggerMessageSubmit(data, (err,res)=>{
-        if(err){
-            //error case
-            console.log('Error:::',err);
-        }else{
-            //success case
-            console.log('Success:::',res);
-        }
-    });
+    if (data.message != ''){
+        console.log(`Submitting Message: ${data.memo} ${data.message}`);
+        data.message = `|${data.memo}${data.message}`;
+        hash.triggerMessageSubmit(data, (err,res)=>{
+            if(err){
+                //error case
+                console.log('Error:::',err);
+            }else{
+                //success case
+                console.log('Success:::',res);
+            }
+        });
+    } else {
+        console.log("empty message");
+    }
 }
 
 exports.submitEditMessage = async (prevUID, messContent) => {
     var data = new Object();
     data.topicId = TOPICID;    
     [data.memo, data.message] = _convertToHMess(messContent);
-    data.memo = prevUID
-    console.log(`Submitting Message: ${data.memo} ${data.message}`);
-    data.message = `|${data.memo}${data.message}`;
-    hash.triggerMessageSubmit(data, (err,res)=>{
-        if(err){
-            //error case
-            console.log('Error:::',err);
-        }else{
-            //success case
-            console.log('Success:::',res);
-        }
-    });
-    
+    if (data.message != ''){
+        data.memo = prevUID
+        console.log(`Submitting Message: ${data.memo} ${data.message}`);
+        data.message = `|${data.memo}${data.message}`;       
+            
+        hash.triggerMessageSubmit(data, (err,res)=>{
+            if(err){
+                //error case
+                console.log('Error:::',err);
+            }else{
+                //success case
+                console.log('Success:::',res);
+            }
+        });
+            
+    } else {
+        console.log("empty message");
+    }
 }

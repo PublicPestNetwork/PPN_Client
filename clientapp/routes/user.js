@@ -19,6 +19,10 @@ router.post('/add', add_controller.add_form_post);
 router.get('/edit', edit_controller.edit_form_get);
 router.post('/edit', edit_controller.edit_form_post);
 
+/// EDIT ROUTES ///
+router.get('/settings', profile_controller.profile_form_get);
+router.post('/settings', profile_controller.profile_form_post);
+
 /*
 /// BOOK ROUTES ///
 

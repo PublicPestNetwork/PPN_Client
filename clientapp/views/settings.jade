@@ -1,0 +1,35 @@
+extends layout
+
+block content
+    H1 Hello #{currUser}
+    form(method='POST' action='')
+        div.form-group
+            if selZip == ''
+                p Select a location to edit
+                select#name.form-control(name='zip_sel', value='')
+                    option(value='', selected=true)
+                    each item in Object.keys(userData.locations)
+                        option #{item}
+                p or add a new one
+                input#name.form-control(type='text', name='newzip_inpt' value='')
+            else
+                h3 current insects
+                if userBugs.length > 0
+                    each item in userBugs
+                        label(for=(item+"_chkbx")) #{item}: 
+                        input(type='checkbox', name=(item+"_chkbx"), checked=true)
+                        br
+                else
+                    p no entries (yet!)
+                h3 reccomend insects (based on location)
+                if reccomendBugs.length > 0
+                    each item in reccomendBugs
+                        label(for=(item+"_chkbx")) #{item}: 
+                        input(type='checkbox', name=(item+"_chkbx"), checked=false)
+                        br
+                else
+                    p no entries (yet!)
+                h3 add new entry
+                input#name.form-control(type='text', name='newbug_inpt' value='')
+            br
+            button.btn.btn-primary(type='submit') Submit

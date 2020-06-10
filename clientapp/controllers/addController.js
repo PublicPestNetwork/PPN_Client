@@ -42,55 +42,76 @@ function updateUserData(selectedZip, uploadData){
 
     if (uploadData){
         appendToLedger(formData)
+        return true;
     }
+    return false;
 }
 
-
+function updateFormData(){
+    currUser = add_model.getCurrentUser();
+    //currUser = "0.0.46775"; // DEBUG
+    updatedFormData = add_model.getUserData(currUser);
+    console.log("=====Updated Form Data=====");
+    console.log(updatedFormData);
+    console.log("===========================");
+    formData.zip = Object.keys(updatedFormData.locations)
+    console.log(Object.keys(updatedFormData.locations));
+    console.log("buglist");
+    console.log(updatedFormData.locations[formData.selectedZip])
+    formData.buglist = updatedFormData.locations[formData.selectedZip];
+    console.log("formdata buglist");
+    console.log(formData.buglist);
+    console.log(updatedFormData.locations);
+    console.log(formData.selectedZip);
+    console.log(updatedFormData.locations[formData.selectedZip]);
+    console.log("===========================");
+}
 
 exports.add_form_get = function(req, res, next) {     
-    
     //res.send(Add.getUserData('bryan'));
     initUserData();
-    res.render('add', { title: 'Add', data: formData });
+    updateFormData();
+    firstrun = true
+    res.render('add', { title: 'Add', data: formData, firstrun });
+    updateFormData();
     
 }
 
 exports.add_form_post = function(req, res, next) {     
-    
+    updateFormData();
     var data = req.body;
     for (var key in req.body) {
         let value = req.body[key];
         if(key == "zip_sel"){
-            formZip = value;
+            formData.selectedZip = value;
         } else {
             if (value != ''){
                 formData.bugCount[key.replace("_inpt", '')] = value
             }
         }
     }
-    if (formData.buglist.length > 0){
+    if (Object.keys(formData.bugCount).length > 0){
         formData.readySubmit = true
-    }   
-    console.log(formData);
-    updateUserData(formZip, formData.readySubmit);
-    /*
-    data.forEach(function (item) {
-        console.log(item.id);
-        console.log(item.Name);
-    });
-    */
-    //res.send(Add.getUserData('bryan'));
-    /*
-    var formZip = req.body.zip_sel;
-    var formContent = req.body;
-    if (formData.buglist.length > 0){
-        //formData.readySubmit = true
-        formContent.forEach(function (item) {
-            console.log(item.id);
-            console.log(item.Name);
-        });
     }
-    updateUserData(formZip, formData.readySubmit);
-    */
-    res.render('add', { title: 'Add', data: formData });
+    console.log("Before update");
+    console.log(formData);
+    updateFormData()
+    console.log("After update");
+    if (updateUserData(formData.selectedZip, formData.readySubmit)){
+        formData = {
+            'zip': [],
+            'selectedZip': '',
+            'buglist': [],
+            'bugCount': {},
+            'readySubmit': false
+        }
+        return res.redirect('/user');
+    }else{
+        updateFormData()
+        console.log("formdata before render");
+        console.log(formData);
+        firstrun = false
+        res.render('add', { title: 'Add', data: formData, firstrun });
+    }
+    
 }

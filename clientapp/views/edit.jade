@@ -9,7 +9,7 @@ block content
             each val,index in data.zip
                 option(value=val selected=(val === data.selectedZip)) #{data.zip[index]}
         div.form-group
-        if data.buglist
+        if firstrun != true
             label(for=("uid_inpt")) Previous UID:  
             input#name.form-control(type='text', name=('uid_inpt') value='')
             br
