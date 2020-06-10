@@ -63,7 +63,7 @@ exports.updateUserBuglist = function(userName, targZip, newBuglist){
     console.log(userDB.users[userName].locations[targZip]);
 }
 
-exports.updateReccomendedBugList = function(targZip, newBuglist){
+exports.updaterecommendedBugList = function(targZip, newBuglist){
     bugDB[targZip] = newBuglist;
     console.log("BugDB");
     console.log(bugDB[targZip]);
