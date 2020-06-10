@@ -16,6 +16,12 @@ var userDB = {
                 "4510":['gnat', 'thrip', 'wasp'],
                 "4050":['whitefly', 'gnat', 'ant']
             }
+        },
+        "0.0.65179":{
+            "locations":{
+                "4510":['gnat', 'thrip', 'wasp'],
+                "4050":['whitefly', 'gnat', 'ant']
+            }
         }
     }
 }
@@ -63,7 +69,7 @@ exports.updateUserBuglist = function(userName, targZip, newBuglist){
     console.log(userDB.users[userName].locations[targZip]);
 }
 
-exports.updateReccomendedBugList = function(targZip, newBuglist){
+exports.updaterecommendedBugList = function(targZip, newBuglist){
     bugDB[targZip] = newBuglist;
     console.log("BugDB");
     console.log(bugDB[targZip]);

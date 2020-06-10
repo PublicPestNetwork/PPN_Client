@@ -21,9 +21,9 @@ block content
                         br
                 else
                     p no entries (yet!)
-                h3 reccomend insects (based on location)
-                if reccomendBugs.length > 0
-                    each item in reccomendBugs
+                h3 recommend insects (based on location)
+                if recommendBugs.length > 0
+                    each item in recommendBugs
                         label(for=(item+"_chkbx")) #{item}: 
                         input(type='checkbox', name=(item+"_chkbx"), checked=false)
                         br

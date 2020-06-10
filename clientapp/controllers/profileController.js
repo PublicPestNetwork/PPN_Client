@@ -7,7 +7,7 @@ const validator = require('express-validator');
 
 var manageInsects = false;
 var userBugs = [];
-var reccomendBugs = [];
+var recommendBugs = [];
 
 function addNewZip(newZip){
     currUser = profile_model.getCurrentUser();
@@ -31,13 +31,13 @@ exports.profile_form_get = function(req, res, next) {
     console.log(userData)
     console.log(Object.keys(userData['locations']));
     selZip = '';
-    reccomendBugs = [];
-    res.render('settings', { title: 'Settings', data: currUser, userData, selZip, reccomendBugs });
+    recommendBugs = [];
+    res.render('settings', { title: 'Settings', data: currUser, userData, selZip, recommendBugs });
 }
 
 exports.profile_form_post = function(req, res, next) {     
     //selZip = '';
-    reccomendBugs = [];
+    recommendBugs = [];
     updatedBuglist = [];
     currUser = profile_model.getCurrentUser();
     //currUser = "0.0.46775"; // DEBUG
@@ -53,13 +53,13 @@ exports.profile_form_post = function(req, res, next) {
             if (req.body.zip_sel != ''){
                 console.log("editing existing zipcode: " + req.body.zip_sel);
                 selZip = req.body.zip_sel;
-                reccomendBugs = profile_model.getBuglist(selZip);
-                if (reccomendBugs == undefined){
-                    reccomendBugs = [];
+                recommendBugs = profile_model.getBuglist(selZip);
+                if (recommendBugs == undefined){
+                    recommendBugs = [];
                 }
                 userBugs = profile_model.getUserData(currUser).locations[selZip];
                 console.log("user bugs for zip sel: " + userBugs);
-                console.log("reccomended bugs for zip sel: " + reccomendBugs);
+                console.log("recommended bugs for zip sel: " + recommendBugs);
                 manageInsects = true;
             }
         }
@@ -77,10 +77,10 @@ exports.profile_form_post = function(req, res, next) {
         }
         console.log("PFC Selected Zip: " + selZip)
         profile_model.updateUserBuglist(currUser, selZip, updatedBuglist);
-        profile_model.updateReccomendedBugList(selZip, updatedBuglist);
+        profile_model.updaterecommendedBugList(selZip, updatedBuglist);
         return res.redirect('/user');
     }
     userData = profile_model.getUserData(currUser);
 
-    res.render('settings', { title: 'Settings', data: currUser, userData, selZip, userBugs, reccomendBugs });
+    res.render('settings', { title: 'Settings', data: currUser, userData, selZip, userBugs, recommendBugs });
 }
