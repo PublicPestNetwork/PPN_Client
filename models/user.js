@@ -16,6 +16,12 @@ var userDB = {
                 "4510":['gnat', 'thrip', 'wasp'],
                 "4050":['whitefly', 'gnat', 'ant']
             }
+        },
+        "0.0.65179":{
+            "locations":{
+                "4510":['gnat', 'thrip', 'wasp'],
+                "4050":['whitefly', 'gnat', 'ant']
+            }
         }
     }
 }
