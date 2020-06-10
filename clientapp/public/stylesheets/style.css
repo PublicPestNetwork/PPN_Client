@@ -2,7 +2,10 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-
+h3{
+  text-align: center;
+}
 a {
+  border: 5px;
   color: #00B7FF;
 }
