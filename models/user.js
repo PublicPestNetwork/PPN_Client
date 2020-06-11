@@ -19,8 +19,9 @@ var userDB = {
         },
         "0.0.65179":{
             "locations":{
-                "4510":['gnat', 'thrip', 'wasp'],
-                "4050":['whitefly', 'gnat', 'ant']
+                "4510":['gnat', 'thrip', 'whitefly, fungus gnat, aphid, spider mite, shorefly, parasitic wasp, ant, crane fly'],
+                "4050":['gnat', 'thrip', 'whitefly, fungus gnat, aphid, spider mite, shorefly, parasitic wasp, ant, crane fly'],
+                "4035":['gnat', 'thrip', 'whitefly, fungus gnat, aphid, spider mite, shorefly, parasitic wasp, ant, crane fly']
             }
         }
     }
