@@ -7,29 +7,34 @@ var userDB = {
     "users":{
         "bryan": {
             "locations":{
-                "4510":['gnat', 'thrip', 'wasp'],
-                "4050":['whitefly', 'gnat', 'ant']
+                "4510":['thrip', 'whitefly', 'fungus gnat', 'aphid', 'spider mite', 'shorefly', 'parasitic wasp', 'ant', 'sweat bee', 'crane fly'],
+                "4050":['thrip', 'whitefly', 'fungus gnat', 'aphid', 'spider mite', 'shorefly', 'parasitic wasp', 'ant', 'sweat bee', 'crane fly']
             }
         },
         "0.0.46775":{
             "locations":{
-                "4510":['gnat', 'thrip', 'wasp'],
-                "4050":['whitefly', 'gnat', 'ant']
+                "4510":['thrip', 'whitefly', 'fungus gnat', 'aphid', 'spider mite', 'shorefly', 'parasitic wasp', 'ant', 'sweat bee', 'crane fly'],
+                "4050":['thrip', 'whitefly', 'fungus gnat', 'aphid', 'spider mite', 'shorefly', 'parasitic wasp', 'ant', 'sweat bee', 'crane fly']
             }
         },
         "0.0.65179":{
             "locations":{
-                "4510":['gnat', 'thrip', 'whitefly, fungus gnat, aphid, spider mite, shorefly, parasitic wasp, ant, crane fly'],
-                "4050":['gnat', 'thrip', 'whitefly, fungus gnat, aphid, spider mite, shorefly, parasitic wasp, ant, crane fly'],
-                "4035":['gnat', 'thrip', 'whitefly, fungus gnat, aphid, spider mite, shorefly, parasitic wasp, ant, crane fly']
+                "4510":['thrip', 'whitefly', 'fungus gnat', 'aphid', 'spider mite', 'shorefly', 'parasitic wasp', 'ant', 'sweat bee', 'crane fly'],
+                "4050":['thrip', 'whitefly', 'fungus gnat', 'aphid', 'spider mite', 'shorefly', 'parasitic wasp', 'ant', 'sweat bee', 'crane fly']
             }
-        }
+        },
+        "default":{
+            "locations":{
+                "4510":['thrip', 'whitefly', 'fungus gnat', 'aphid', 'spider mite', 'shorefly', 'parasitic wasp', 'ant', 'sweat bee', 'crane fly'],
+                "4050":['thrip', 'whitefly', 'fungus gnat', 'aphid', 'spider mite', 'shorefly', 'parasitic wasp', 'ant', 'sweat bee', 'crane fly']
+            }
+        }  
     }
 }
 
 var bugDB = {
-    "4510":['whitefly', 'gnat', 'firefly'],
-    "4050":['dragonfly', 'ant', 'flea']
+    "4510":['firefly', 'thrip', 'whitefly', 'fungus gnat', 'aphid', 'spider mite', 'shorefly', 'parasitic wasp', 'ant', 'sweat bee', 'crane fly'],
+    "4050":['dragonfly', 'thrip', 'whitefly', 'fungus gnat', 'aphid', 'spider mite', 'shorefly', 'parasitic wasp', 'ant', 'sweat bee', 'crane fly']
 }
 console.log(userDB);
 
@@ -37,7 +42,7 @@ exports.getUserData = function(uid) {
     if(userDB.users.hasOwnProperty(uid)){
         return userDB.users[uid];
     } else {
-        return false
+        return userDB.users['default'];
     }
 };
 
