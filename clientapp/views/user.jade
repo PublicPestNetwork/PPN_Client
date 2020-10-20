@@ -1,8 +1,12 @@
 extends layout
 
 block content
-   div(class="image")
-    img(src="images/PPNLogo.png" alt="Image Title" height="75" width="100")
+   div(class="header")
+    a.button-add(href='/user') 
+      img(src="images/PPNLogo.png" alt="Image Title" height="175" width="300")
+   div(class="about")
+        a.scanBtn(href='/about', class="sans-serif") About Us
+        a.scanBtn(href='/future', class="sans-serif") Future
    h3(class="sans-serif") What would you like to do?
       br
       a(href='/user/add') Add new data to the Public Ledger

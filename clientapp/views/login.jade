@@ -1,23 +1,26 @@
 extends layout
 
 block content
-  div(class="image")
-    img(src="images/PPNLogo.png" alt="Image Title" height="75" width="100")
+  div(class="header")
+    a.button-add(href='/login') 
+      img(src="images/PPNLogo.png" alt="Image Title" height="175" width="300")
+  div(class="about")
+    a.scanBtn(href='/about', class="sans-serif") About Us
+    a.scanBtn(href='/future', class="sans-serif") Future
   h3(class="sans-serif") Welcome to the Public Pest Network
-  h1(class="sans-serif") Please Login
+  h1(class="sans-serif", style="text-align: center") Login
   form(method='POST' action='')
     div.form-group
-      label(for='acctID_inpt' class="sans-serif") Account ID:
-      input#name.form-control(type='text', name='acctId_inpt' value=(undefined===data.accountID ? '' : data.accountID))
+      label(for='acctID_inpt' class="sans-serif") Account ID: 
+      input#name.form-control(type='text', name='acctId_inpt' value=(undefined===data.accountID ? '' : data.accountID)) 
+      br
+      label(for='privKey_inpt' class="sans-serif") Private Key: 
+      input#name.form-control(type='text', name='privKey_inpt' value=(undefined===data.accountID ? '' : data.accountID))
       br
       label(for='ntwrk_sel' class="sans-serif") Select Network:   
-      
       select#name.form-control(name='ntwrk_sel', value=(undefined===data.selectedNetwork ? '' : data.selectedNetwork))
         each val,index in data.networkOptions
             option #{data.networkOptions[index]}
-      br
-      label(for='privKey_inpt' class="sans-serif") Private Key:
-      input#name.form-control(type='text', name='privKey_inpt' value=(undefined===data.accountID ? '' : data.accountID))
       br
     button.btn.btn-primary(type='submit') Submit
     h1= errors
