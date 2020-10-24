@@ -7,39 +7,39 @@ var userDB = {
     "users":{
         "bryan": {
             "locations":{
-                "4510":['Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'Shoreflu', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly'],
-                "4050":['Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'Shoreflu', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly'],
-                "4035":['Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'Shoreflu', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly']
+                "4510":['Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'ShoreFly', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly'],
+                "4050":['Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'ShoreFly', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly'],
+                "4035":['Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'ShoreFly', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly']
             }
         },
         "0.0.46775":{
             "locations":{
-                "4510":['Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'Shoreflu', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly'],
-                "4050":['Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'Shoreflu', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly'],
-                "4035":['Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'Shoreflu', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly']
+                "4510":['Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'ShoreFly', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly'],
+                "4050":['Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'ShoreFly', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly'],
+                "4035":['Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'ShoreFly', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly']
             }
         },
         "0.0.65179":{
             "locations":{
-                "4510":['Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'Shoreflu', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly'],
-                "4050":['Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'Shoreflu', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly'],
-                "4035":['Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'Shoreflu', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly']
+                "4510":['Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'ShoreFly', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly'],
+                "4050":['Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'ShoreFly', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly'],
+                "4035":['Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'ShoreFly', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly']
             }
         },
         "default":{
             "locations":{
-                "4510":['Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'Shoreflu', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly'],
-                "4050":['Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'Shoreflu', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly'],
-                "4035":['Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'Shoreflu', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly']
+                "4510":['Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'ShoreFly', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly'],
+                "4050":['Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'ShoreFly', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly'],
+                "4035":['Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'ShoreFly', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly']
             }
         }  
     }
 }
 
 var bugDB = {
-    "4510":['Firefly', 'Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'Shoreflu', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly'],
-    "4050":['Dragonfly', 'Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'Shoreflu', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly'],
-    "4035":['Mothra', 'Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'Shoreflu', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly']
+    "4510":['Firefly', 'Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'ShoreFly', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly'],
+    "4050":['Dragonfly', 'Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'ShoreFly', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly'],
+    "4035":['Mothra', 'Thrips', 'Whitefly', 'Fungus gnat', 'Aphid', 'Spider mite', 'ShoreFly', 'Parasitic wasp', 'Ant', 'Sweat bee', 'Crane fly']
 }
 console.log(userDB);
 
